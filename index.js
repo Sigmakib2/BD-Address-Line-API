@@ -1,6 +1,143 @@
+/**
+ * @swagger
+ * /suggestions:
+ *   get:
+ *     summary: Get suggestions based on user input
+ *     parameters:
+ *       - in: query
+ *         name: input
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User input for suggestions
+ *     responses:
+ *       '200':
+ *         description: List of suggestions matching the user input
+ */
+
+/**
+ * @swagger
+ * /districts:
+ *   get:
+ *     summary: Get list of unique districts
+ *     responses:
+ *       '200':
+ *         description: List of unique districts
+ */
+
+/**
+ * @swagger
+ * /divisions:
+ *   get:
+ *     summary: Get list of unique divisions
+ *     responses:
+ *       '200':
+ *         description: List of unique divisions
+ */
+
+/**
+ * @swagger
+ * /upazilas:
+ *   get:
+ *     summary: Get list of unique upazilas
+ *     responses:
+ *       '200':
+ *         description: List of unique upazilas
+ */
+
+/**
+ * @swagger
+ * /division/{divisionName}:
+ *   get:
+ *     summary: Get information about a specific division
+ *     parameters:
+ *       - in: path
+ *         name: divisionName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the division
+ *     responses:
+ *       '200':
+ *         description: Information about the specified division
+ */
+
+/**
+ * @swagger
+ * /division/{divisionName}/districts:
+ *   get:
+ *     summary: Get list of districts under a specific division
+ *     parameters:
+ *       - in: path
+ *         name: divisionName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the division
+ *     responses:
+ *       '200':
+ *         description: List of districts under the specified division
+ */
+
+/**
+ * @swagger
+ * /division/{divisionName}/district/{districtName}/upazilas:
+ *   get:
+ *     summary: Get list of upazilas under a specific district within a division
+ *     parameters:
+ *       - in: path
+ *         name: divisionName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the division
+ *       - in: path
+ *         name: districtName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the district
+ *     responses:
+ *       '200':
+ *         description: List of upazilas under the specified district
+ */
+
+/**
+ * @swagger
+ * /division/{divisionName}/district/{districtName}/upazila/{upazilaName}/postoffices:
+ *   get:
+ *     summary: Get list of post offices under a specific upazila
+ *     parameters:
+ *       - in: path
+ *         name: divisionName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the division
+ *       - in: path
+ *         name: districtName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the district
+ *       - in: path
+ *         name: upazilaName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the upazila
+ *     responses:
+ *       '200':
+ *         description: List of post offices under the specified upazila
+ */
+
+
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const { specs, swaggerUi } = require('./swagger');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Read postal data from JSON file
 const postalData = JSON.parse(fs.readFileSync('data.json'));
