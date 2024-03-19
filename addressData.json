@@ -1,0 +1,17 @@
+{
+    "divisions": [
+        {
+            "name": "Dhaka",
+            "zilas": [
+                "Dhaka",
+                "Gazipur"
+            ],
+            "upazilas": [
+                "Dhaka",
+                "Gazipur",
+                "sakib",
+                "sakib2"
+            ]
+        }
+    ]
+}
